@@ -144,3 +144,9 @@ cython_debug/
 # OS
 .DS_Store
 Thumbs.db
+# Toy trajectory archives: 118MB, needs git-lfs which is not always available.
+# The 600 sigma_*_transition_*.txt files are the actual experiment inputs and ARE tracked.
+data/Toy_Model_Trajectories/AllTrajs.zip.part*
+
+# Resumable sweep progress logs (regenerable; see mfpy/experiments/toy_sweep.py)
+results/**/_partial.jsonl

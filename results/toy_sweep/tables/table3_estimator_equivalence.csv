@@ -1,0 +1,4 @@
+,mean |gap| (steps),median |gap| (steps),p90 |gap| (steps)
+gradient vs run_edge,1.3658951667801225,1.0,3.0
+gradient vs half_max,1.292716133424098,1.0,2.5
+run_edge vs half_max,2.4400953029271615,2.5,4.0

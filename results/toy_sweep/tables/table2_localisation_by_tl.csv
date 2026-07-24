@@ -1,0 +1,6 @@
+,median_abs_error,median_abs_error,median_abs_error,median_abs_error,median_abs_error,median_signed_error,median_signed_error,median_signed_error,median_signed_error,median_signed_error
+tl_bin,1-10,11-25,26-50,51-75,76-100,1-10,11-25,26-50,51-75,76-100
+estimator,,,,,,,,,,
+gradient,2.0,3.5,12.5,23.5,33.75,-2.0,3.5,12.0,23.0,33.25
+run_edge,3.0,2.5,11.5,22.0,32.0,-3.0,2.0,11.0,21.75,32.0
+half_max,1.0,5.0,14.0,24.0,35.0,-1.0,5.0,13.25,24.0,35.0
