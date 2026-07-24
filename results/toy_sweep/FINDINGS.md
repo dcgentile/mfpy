@@ -149,6 +149,13 @@ hiding it.
 window setting but weak: **-0.09 to -0.24** (`w = 10` not significant, p = 0.14). Under
 boundary scoring, ramp length dominates noise level by a wide margin.
 
+*Internal consistency check.* In `figures/f1_vs_transition_length.pdf`, F1 at `tau = 25`
+holds near its ceiling and then falls off a cliff at `l` ~ 62 for sigma = 0 and sigma = 5.
+That is exactly where Finding 1 predicts it should: the bias reaches the tolerance when
+`0.4*l = 25`, i.e. `l = 62.5`. The detection curve and the localisation measurement are
+independent computations, so their agreeing on that crossover is a useful check that both
+are behaving as described.
+
 ## Finding 5: window choice
 
 With boundary scoring the window matters much less than `l` or `q`. Mean F1 at

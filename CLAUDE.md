@@ -121,3 +121,27 @@ reviewer wording.
 - `data/Toy_Model_Trajectories/AllTrajs.zip.part*` is gitignored (118MB, needs LFS, and
   git-lfs is not installed in the sandbox). The 600 `.txt` files are the real inputs and
   are tracked.
+
+## Housekeeping left over from the first session
+
+The sandbox cannot delete files on the mounted repo, so a few things need a manual `rm`:
+
+```bash
+rm -f .git/index.lock .git/HEAD.lock .git/objects/maintenance.lock
+rm -f .git/objects/*/tmp_obj_*
+rm -f results/toy_sweep/tables/table1_by_sigma.* \
+      results/toy_sweep/tables/table2_by_tl_bin.* \
+      results/toy_sweep/tables/table3_window_choice.* \
+      results/toy_sweep/tables/table4_tolerance.*
+git status   # index will look stale until this runs; that is expected
+```
+
+Those four table files are **stubs marked SUPERSEDED** — they came from the earlier
+containment-based scoring and their real content was wrong. The current tables are
+`table1_detection_by_tolerance`, `table2_localisation_by_tl`,
+`table3_estimator_equivalence`, `table4_window_choice`, `table5_threshold_diagnosis`.
+
+There is also one uncommitted change: `analyze_toy_sweep.py` regained
+`fig_f1_vs_transition_length` and `fig_window_heatmap` (regenerated under boundary
+scoring), plus a consistency-check paragraph in `FINDINGS.md`. Commit after clearing the
+locks.

@@ -336,6 +336,99 @@ def fig_threshold_diagnosis(thr, best, fig_dir):
     plt.close(fig)
 
 
+def fig_f1_vs_tl(df, fig_dir):
+    """
+    Detection accuracy against ramp length. Under boundary scoring this is a strong,
+    monotone effect; under the containment criterion this analysis originally used, it
+    was absent. Uses tau=25, generous enough not to be dominated by the localisation
+    bias documented separately.
+    """
+    metric = "f1_tau25"
+    g = df[df["estimator"] == "gradient"]
+    sigmas = sorted(g["sigma"].unique())
+    fig, axes = plt.subplots(1, len(sigmas), figsize=(5 * len(sigmas), 4), sharey=True)
+    if len(sigmas) == 1:
+        axes = [axes]
+
+    for ax, sigma in zip(axes, sigmas):
+        sub = g[g["sigma"] == sigma]
+        for setting in SETTING_ORDER:
+            s = sub[sub["window_setting"] == setting].sort_values("transition_length")
+            if s.empty:
+                continue
+            y = s[metric].rolling(5, center=True, min_periods=1).mean()
+            ax.plot(
+                s["transition_length"], y, lw=1.8, alpha=0.9, label=SETTING_LABEL[setting]
+            )
+        ax.set_title(rf"$\sigma = {sigma}$")
+        ax.set_xlabel(r"transition length $\ell$")
+        ax.grid(alpha=0.3)
+        ax.set_ylim(0, 1.05)
+    axes[0].set_ylabel(r"$F_1$ at $\tau=25$")
+    axes[-1].legend(loc="upper right", fontsize=9)
+    fig.suptitle(
+        "Detection degrades monotonically with transition length "
+        "(5-point rolling mean; gradient estimator)",
+        y=1.02,
+    )
+    fig.tight_layout()
+    for ext in ("pdf", "png"):
+        fig.savefig(
+            os.path.join(fig_dir, f"f1_vs_transition_length.{ext}"),
+            dpi=200,
+            bbox_inches="tight",
+        )
+    plt.close(fig)
+
+
+def fig_window_heatmap(df, fig_dir):
+    """Window choice across noise and ramp length, at tau=25."""
+    metric = "f1_tau25"
+    g = df[df["estimator"] == "gradient"]
+    sigmas = sorted(g["sigma"].unique())
+    fig, axes = plt.subplots(
+        1, len(sigmas), figsize=(4.6 * len(sigmas), 3.6), gridspec_kw={"wspace": 0.12}
+    )
+    if len(sigmas) == 1:
+        axes = [axes]
+
+    for k, (ax, sigma) in enumerate(zip(axes, sigmas)):
+        piv = (
+            g[g["sigma"] == sigma]
+            .groupby(["window_setting", "tl_bin"], observed=True)[metric]
+            .mean()
+            .unstack("tl_bin")
+            .reindex(SETTING_ORDER)
+        )
+        im = ax.imshow(piv.values, vmin=0, vmax=1, cmap="viridis", aspect="auto")
+        ax.set_xticks(range(len(piv.columns)))
+        ax.set_xticklabels(piv.columns, rotation=45, ha="right")
+        ax.set_yticks(range(len(piv.index)))
+        # only the leftmost panel carries the window labels, otherwise they overlap
+        ax.set_yticklabels(
+            [SETTING_LABEL[s] for s in piv.index] if k == 0 else []
+        )
+        ax.set_title(rf"$\sigma = {sigma}$")
+        ax.set_xlabel(r"transition length $\ell$")
+        for i in range(piv.shape[0]):
+            for j in range(piv.shape[1]):
+                v = piv.values[i, j]
+                if np.isfinite(v):
+                    ax.text(
+                        j, i, f"{v:.2f}", ha="center", va="center",
+                        color="white" if v < 0.6 else "black", fontsize=8,
+                    )
+    fig.colorbar(im, ax=axes, fraction=0.02, pad=0.02, label=r"mean $F_1$ ($\tau=25$)")
+    fig.suptitle(r"Choice of window $w$ across noise and transition length", y=1.04)
+    for ext in ("pdf", "png"):
+        fig.savefig(
+            os.path.join(fig_dir, f"window_choice_heatmap.{ext}"),
+            dpi=200,
+            bbox_inches="tight",
+        )
+    plt.close(fig)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument(
@@ -365,6 +458,8 @@ def main():
 
     fig_tolerance_curves(curve, fig_dir)
     fig_localisation_bias(df, fig_dir)
+    fig_f1_vs_tl(df, fig_dir)
+    fig_window_heatmap(df, fig_dir)
 
     print("Table 1 - mean F1 by estimator and window, at several tolerances\n")
     print(t_det.round(3).to_string())
