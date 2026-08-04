@@ -89,11 +89,14 @@ Scripts (`mfpy/experiments/`):
 Roughly in dependency order. `paper-resources/revision_summary.md` has the full list with
 reviewer wording.
 
-1. **Resampling threshold (Matteson & James 2014).** Highest value, directly actioned by
-   finding 4. Replace the fixed quantile with a resampling-based threshold so the method
-   does not need to know the transition fraction, then re-run
-   `toy_threshold_sweep.py`-style scoring to show the bias is removed. Also test the
-   `q`–`w` interaction left open above.
+1. **Resampling threshold (Matteson & James 2014) — done, see
+   `results/resampling_threshold/FINDINGS.md`.** A pointwise permutation-null threshold
+   (`resample_pointwise` in `mfpy/experiments/resampling_threshold.py`) beats the fixed
+   quantile at a single global q=0.5, no per-trajectory tuning needed, and roughly halves
+   the localisation-bias growth with transition length. A naive max-type/family-wise
+   translation of their permutation test was tried first and fails (too conservative);
+   that negative result is also written up and worth citing in the rebuttal as evidence of
+   engagement. Still open: the `q`–`w` interaction, and folding this into the manuscript.
 2. **Literature.** Vogt & Dette 2015 (gradual changes — relevant to the ramp structure
    here); Matteson & James 2014; Eichinger & Kirch 2018 and McGonigle & Cho 2025 (to be
    added to the MWCPD literature review); Jula Vanegas et al. 2022 (possible dynamic-sort

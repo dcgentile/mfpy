@@ -56,19 +56,19 @@ into the interior of the ramp**.
 This is the headline. Median localisation error grows almost perfectly linearly with
 ramp length:
 
-| fixed window | slope (steps per unit `l`) | r |
-|---|---|---|
-| `w = 10`  | 0.336 | 0.936 |
-| `w = 25`  | 0.372 | 0.965 |
-| `w = 50`  | 0.451 | 0.993 |
-| `w = 100` | 0.444 | 0.992 |
+| fixed window | slope (steps per unit `l`) | r     |
+|--------------|----------------------------|-------|
+| `w = 10`     | 0.336                      | 0.936 |
+| `w = 25`     | 0.372                      | 0.965 |
+| `w = 50`     | 0.451                      | 0.993 |
+| `w = 100`    | 0.444                      | 0.992 |
 
 The error is *signed inward*: the method reports the first change point well after the
 ramp has begun and the second well before it ends, so the detected transition is a
 shrunken image of the true one. At `w = 25`, median absolute error by ramp length:
 
-| `l` | 1 | 10 | 25 | 50 | 75 | 100 |
-|---|---|---|---|---|---|---|
+| `l`                      | 1   | 10  | 25  | 50   | 75   | 100  |
+|--------------------------|-----|-----|-----|------|------|------|
 | median abs error (steps) | 3.5 | 1.0 | 6.5 | 18.5 | 27.0 | 30.0 |
 
 For short ramps (`l` < ~15) the error is small and slightly *outward* (negative), which
@@ -86,11 +86,11 @@ and differ only in boundary extraction:
 
 **All three agree to within a couple of time steps everywhere:**
 
-| comparison | mean gap | median gap | p90 gap |
-|---|---|---|---|
-| gradient vs run_edge | 1.37 | 1.0 | 3.0 |
-| gradient vs half_max | 1.29 | 1.0 | 2.5 |
-| run_edge vs half_max | 2.44 | 2.5 | 4.0 |
+| comparison           | mean gap | median gap | p90 gap |
+|----------------------|----------|------------|---------|
+| gradient vs run_edge | 1.37     | 1.0        | 3.0     |
+| gradient vs half_max | 1.29     | 1.0        | 2.5     |
+| run_edge vs half_max | 2.44     | 2.5        | 4.0     |
 
 Changing the extraction rule does not move the bias. It is inherited from stage 1: the
 supra-threshold run is itself much narrower than the ramp, so *any* rule reading
@@ -112,12 +112,12 @@ q* = 1 - (fraction of trajectory spent in transition) = 1 - 19*l / (5000 + 19*l)
 
 Sweeping `q` over every trajectory confirms it. Empirically best `q` versus predicted `q*`:
 
-| `l` | 1 | 10 | 20 | 40 | 60 | 80 | 100 |
-|---|---|---|---|---|---|---|---|
-| best `q` (empirical) | 0.990 | 0.950 | 0.925 | 0.850 | 0.800 | 0.750 | 0.700 |
-| `q* = 1 - ramp fraction` | 0.996 | 0.963 | 0.929 | 0.868 | 0.814 | 0.767 | 0.725 |
-| median abs error at best `q` | 0.0 | 1.0 | 1.0 | 1.0 | 2.0 | 4.0 | 3.0 |
-| median abs error at `q = 0.95` | 3.5 | 1.0 | 4.0 | 14.0 | 22.0 | 27.0 | 30.0 |
+| `l`                            | 1     | 10    | 20    | 40    | 60    | 80    | 100   |
+|--------------------------------|-------|-------|-------|-------|-------|-------|-------|
+| best `q` (empirical)           | 0.990 | 0.950 | 0.925 | 0.850 | 0.800 | 0.750 | 0.700 |
+| `q* = 1 - ramp fraction`       | 0.996 | 0.963 | 0.929 | 0.868 | 0.814 | 0.767 | 0.725 |
+| median abs error at best `q`   | 0.0   | 1.0   | 1.0   | 1.0   | 2.0   | 4.0   | 3.0   |
+| median abs error at `q = 0.95` | 3.5   | 1.0   | 4.0   | 14.0  | 22.0  | 27.0  | 30.0  |
 
 Spearman(best `q`, `q*`) = 0.753, p = 4e-56. The agreement is limited mainly by the
 coarseness of the `q` grid — the by-`l` medians above track `q*` to within one grid step

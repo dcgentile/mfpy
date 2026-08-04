@@ -150,3 +150,5 @@ data/Toy_Model_Trajectories/AllTrajs.zip.part*
 
 # Resumable sweep progress logs (regenerable; see mfpy/experiments/toy_sweep.py)
 results/**/_partial.jsonl
+results/toy_sweep/figures.zip
+paper-resources/opus_prompt_joint_vs_marginal.md
