@@ -1,0 +1,5 @@
+w,null_cutoff_at_q_0.5,equivalent_observed_quantile,baseline_cutoff_at_q_0.75
+10,28.608,0.964,6.558
+25,19.471,0.800,14.058
+50,14.286,0.636,33.431
+100,10.408,0.500,69.288

@@ -152,3 +152,9 @@ data/Toy_Model_Trajectories/AllTrajs.zip.part*
 results/**/_partial.jsonl
 results/toy_sweep/figures.zip
 paper-resources/opus_prompt_joint_vs_marginal.md
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.synctex.gz

@@ -1,0 +1,2 @@
+dataset,sigma,sigma_rule,median_w2_sq,n_segments,k,eigengap_k,ari_vs_code_default,ari_vs_next_sigma,n_clusters_used,v3,v2,fidelity_norm
+langevin,0.2811001004867353,median,0.5622002009734706,157,3,2,0.8442175955689164,,3,0.673879263507272,0.6739223395758699,0.1083856582083292

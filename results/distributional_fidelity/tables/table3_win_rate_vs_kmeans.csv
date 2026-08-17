@@ -1,0 +1,4 @@
+sigma,n,adp_beats_kmeans,n_oracle,oracle_beats_kmeans
+0,89,0.000,0,
+5,100,0.000,96,0.927
+20,100,0.450,100,0.640

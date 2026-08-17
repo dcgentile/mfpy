@@ -1,0 +1,24 @@
+x1_mean_pre: -0.0299
+x1_mean_post: -0.0184
+x1_var_pre: 1.0389
+x1_var_post: 0.9696
+x2_mean_pre: 0.0117
+x2_mean_post: -0.0082
+x2_var_pre: 1.0356
+x2_var_post: 0.9378
+corr_pre: -0.8616
+corr_post: 0.8369
+
+detected change points, X1 marginal (w=50,q=0.95): [np.int64(0), np.int64(506), np.int64(507), np.int64(825), np.int64(868), np.int64(870), np.int64(919), np.int64(928), np.int64(1469), np.int64(1477), np.int64(1518), np.int64(1527), np.int64(1999)]
+detected change points, X2 marginal (w=50,q=0.95): [np.int64(0), np.int64(149), np.int64(150), np.int64(240), np.int64(243), np.int64(249), np.int64(250), np.int64(825), np.int64(872), np.int64(875), np.int64(905), np.int64(937), np.int64(986), np.int64(987), np.int64(1467), np.int64(1476), np.int64(1481), np.int64(1482), np.int64(1563), np.int64(1586), np.int64(1587), np.int64(1865), np.int64(1869), np.int64(1875), np.int64(1876), np.int64(1886), np.int64(1887), np.int64(1999)]
+detected change points, MD/Sinkhorn on joint (X1,X2) (w=50,q=0.95,reg=0.05): [np.int64(0), np.int64(919), np.int64(928), np.int64(985), np.int64(1005), np.int64(1469), np.int64(1475), np.int64(1520), np.int64(1524), np.int64(1999)]
+
+pooled-covariance eigenvalues (descending): [np.float64(0.947343203006171), np.float64(1.0447061632153485)]
+pooled-covariance eigenvectors (cols, descending eigval):
+[[-0.6404197  -0.76802514]
+ [-0.76802514  0.6404197 ]]
+PC1 var pre/post: 1.9166 / 0.1715
+PC2 var pre/post: 0.1578 / 1.7359
+detected change points, PC1 (w=50,q=0.95): [np.int64(0), np.int64(240), np.int64(243), np.int64(824), np.int64(825), np.int64(868), np.int64(870), np.int64(905), np.int64(919), np.int64(937), np.int64(1999)]
+detected change points, PC2 (w=50,q=0.95): [np.int64(0), np.int64(994), np.int64(1005), np.int64(1467), np.int64(1476), np.int64(1518), np.int64(1527), np.int64(1533), np.int64(1563), np.int64(1564), np.int64(1570), np.int64(1572), np.int64(1577), np.int64(1579), np.int64(1583), np.int64(1588), np.int64(1592), np.int64(1593), np.int64(1869), np.int64(1871), np.int64(1876), np.int64(1999)]
+true change point: 1000

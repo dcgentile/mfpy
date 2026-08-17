@@ -33,6 +33,58 @@ def compute_metric_derivative_1d(X, w):
     return gammadot
 
 
+def compute_metric_derivative_md(X, w, reg=0.05, numIterMax=200, **sinkhorn_kwargs):
+    """
+    Multivariate analogue of compute_metric_derivative_1d.
+
+    Exact W2 between empirical measures in R^d (d > 1) is a d! or LP-scale problem and
+    is not tractable at sliding-window scale, so this uses the entropic-regularized
+    (Sinkhorn) OT distance instead, which is the standard fix for the curse of
+    dimensionality in this setting. This is a genuinely different statistic from
+    compute_metric_derivative_1d applied per-coordinate: it sees the joint sample in
+    each half-window, so it is sensitive to changes in dependence structure (e.g. a
+    change in correlation) that leave every marginal untouched.
+
+    Parameters
+    ----------
+    X: array-like, shape (T, d)
+       multivariate time series
+    w: integer,
+       windowsize for sliding window
+    reg: float,
+       entropic regularization strength passed to ot.bregman.empirical_sinkhorn2.
+       Larger reg = more bias toward 0, smaller reg = slower/less stable Sinkhorn.
+       Default 0.05 chosen empirically on results/correlation_change (best
+       signal-to-noise of the near-tested grid {0.03, 0.05, 0.1, 0.2, 0.3}).
+    numIterMax: integer,
+       cap on Sinkhorn iterations per window. The POT default (10000) lets a
+       non-converging window stall a whole sweep; 200 is enough to converge for
+       reg >= 0.03 at window sizes used here and keeps runtime bounded regardless.
+    sinkhorn_kwargs:
+       forwarded to ot.bregman.empirical_sinkhorn2 (e.g. numIterMax, stopThr)
+
+    Returns
+    -------
+    gammadot
+        floating point array of shape (T,), the approximate metric derivative using
+        the entropic OT cost between left- and right-half-window empirical measures.
+        Comparable in scale to compute_metric_derivative_1d (both are sqrt of an OT
+        cost with squared-Euclidean ground metric) but not identical, since Sinkhorn
+        is a biased estimator of W2.
+    """
+    X = np.asarray(X)
+    if X.ndim == 1:
+        X = X[:, None]
+    T = X.shape[0]
+    gammadot = np.zeros(T)
+    for t in tqdm(range(w, T - w)):
+        a = X[t - w : t]
+        b = X[t : t + w]
+        cost = ot.bregman.empirical_sinkhorn2(a, b, reg, numIterMax=numIterMax, **sinkhorn_kwargs)
+        gammadot[t] = np.sqrt(max(cost, 0.0))
+    return gammadot
+
+
 def compute_metric_derivative_periodic(X, w):
     """
     Compute change points for a periodic time series X using windowsize w

@@ -1,0 +1,16 @@
+arm,w,best_q,f1_at_best_q
+baseline (300 traj),10,0.800,0.486
+baseline (300 traj),25,0.750,0.626
+baseline (300 traj),50,0.750,0.539
+baseline (300 traj),100,0.800,0.581
+baseline (300 traj),worst-case over w,0.800,0.486
+baseline (60 traj),10,0.800,0.484
+baseline (60 traj),25,0.750,0.615
+baseline (60 traj),50,0.750,0.533
+baseline (60 traj),100,0.800,0.557
+baseline (60 traj),worst-case over w,0.750,0.482
+resample_pointwise (60 traj),10,0.500,0.320
+resample_pointwise (60 traj),25,0.500,0.666
+resample_pointwise (60 traj),50,0.925,0.535
+resample_pointwise (60 traj),100,0.990,0.105
+resample_pointwise (60 traj),worst-case over w,0.990,0.105
