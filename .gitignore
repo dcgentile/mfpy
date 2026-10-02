@@ -158,3 +158,9 @@ paper-resources/opus_prompt_joint_vs_marginal.md
 *.log
 *.out
 *.synctex.gz
+
+# local backups of the Overleaf project (large tarballs, not for git)
+paper-resources/backups/
+
+# local data bundle (>100 MB, GitHub rejects it)
+data/*.tar.gz
