@@ -1,0 +1,20 @@
+x1_mean_pre: -0.0480
+x1_mean_post: -0.0080
+x1_var_pre: 0.9540
+x1_var_post: 1.0459
+x2_mean_pre: -0.0459
+x2_mean_post: -0.0179
+x2_var_pre: 0.9639
+x2_var_post: 1.0457
+corr_pre: -0.0521
+corr_post: -0.0601
+mean_abs_x1_minus_abs_x2_pre: 0.6254
+mean_abs_x1_minus_abs_x2_post: 0.0000
+
+pooled-covariance eigenvalues (descending): [np.float64(0.9469737555120713), np.float64(1.0594266350485027)]
+detected change points, X1 marginal (w=50,q=0.95): [np.int64(0), np.int64(173), np.int64(179), np.int64(188), np.int64(189), np.int64(304), np.int64(930), np.int64(931), np.int64(1010), np.int64(1011), np.int64(1014), np.int64(1024), np.int64(1038), np.int64(1040), np.int64(1068), np.int64(1070), np.int64(1077), np.int64(1087), np.int64(1266), np.int64(1271), np.int64(1284), np.int64(1288), np.int64(1642), np.int64(1999)]
+detected change points, X2 marginal (w=50,q=0.95): [np.int64(0), np.int64(945), np.int64(955), np.int64(1096), np.int64(1195), np.int64(1210), np.int64(1410), np.int64(1411), np.int64(1416), np.int64(1425), np.int64(1434), np.int64(1461), np.int64(1471), np.int64(1486), np.int64(1999)]
+detected change points, PC1 (w=50,q=0.95): [np.int64(0), np.int64(929), np.int64(932), np.int64(935), np.int64(936), np.int64(944), np.int64(948), np.int64(993), np.int64(994), np.int64(997), np.int64(1001), np.int64(1007), np.int64(1010), np.int64(1020), np.int64(1026), np.int64(1078), np.int64(1084), np.int64(1266), np.int64(1267), np.int64(1272), np.int64(1273), np.int64(1422), np.int64(1423), np.int64(1999)]
+detected change points, PC2 (w=50,q=0.95): [np.int64(0), np.int64(946), np.int64(948), np.int64(953), np.int64(954), np.int64(1999)]
+detected change points, MD/Sinkhorn on joint (X1,X2) (w=50,q=0.95,reg=0.05): [np.int64(0), np.int64(946), np.int64(948), np.int64(953), np.int64(954), np.int64(1999)]
+true change point: 1000
