@@ -164,3 +164,9 @@ paper-resources/backups/
 
 # local data bundle (>100 MB, GitHub rejects it)
 data/*.tar.gz
+
+# Clustering label arrays are regenerable outputs; the segments_*.csv beside them are tracked
+results/**/*.npy
+
+# Test-data bundle for the unvalidated iterative-resegmenting scripts (11 MB, generator not in repo)
+mfpy/experiments/three_mean_test_data.npz
