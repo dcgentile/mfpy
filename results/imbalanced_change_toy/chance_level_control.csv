@@ -1,0 +1,7 @@
+ratio,method,mean_n_predicted,observed_small_recall,chance_small_recall,small_recall_above_chance,observed_big_recall,chance_big_recall,big_recall_above_chance
+1,baseline,76,0.356,0.215,0.142,0.444,0.218,0.226
+1,resample_pointwise,443,0.888,0.762,0.126,0.881,0.758,0.124
+3,baseline,42,0.081,0.118,-0.037,0.975,0.125,0.85
+3,resample_pointwise,394,0.875,0.711,0.164,0.775,0.709,0.066
+10,baseline,31,0.0,0.095,-0.095,1.0,0.107,0.893
+10,resample_pointwise,46,0.112,0.146,-0.033,0.094,0.136,-0.043

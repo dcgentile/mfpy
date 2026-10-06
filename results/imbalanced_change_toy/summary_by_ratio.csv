@@ -1,0 +1,7 @@
+ratio,method,small_recall,big_recall,all_recall,precision,v_measure,n_predicted_cps
+1,baseline,0.356,0.444,0.384,0.163,0.001,75.5
+1,resample_pointwise,0.888,0.881,0.869,0.063,0.04,443.15
+3,baseline,0.081,0.975,0.508,0.387,0.497,42.25
+3,resample_pointwise,0.875,0.775,0.831,0.068,0.408,393.55
+10,baseline,0.0,1.0,0.467,0.482,0.555,31.0
+10,resample_pointwise,0.112,0.094,0.114,0.078,0.522,46.0
