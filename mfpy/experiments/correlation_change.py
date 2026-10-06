@@ -241,8 +241,12 @@ def make_figures(X, cp, g1, g2, c1, c2, g_md=None, c_md=None):
     # blind 1D marginal statistics, stacked for direct comparison
     fig, axes = plt.subplots(3, 1, figsize=(8, 6.5), sharex=True)
     axes[0].plot(g1, lw=0.7, color="#3B7DD8")
+    for c in c1:
+        axes[0].axvline(c, color="green", ls=":", lw=1)
     axes[0].set_ylabel(r"$\dot\gamma$, $X_1$ only")
     axes[1].plot(g2, lw=0.7, color="#D8763B")
+    for c in c2:
+        axes[1].axvline(c, color="green", ls=":", lw=1)
     axes[1].set_ylabel(r"$\dot\gamma$, $X_2$ only")
     axes[2].plot(g_md, lw=0.9, color="#2E9E5B")
     for c in c_md:
@@ -253,6 +257,11 @@ def make_figures(X, cp, g1, g2, c1, c2, g_md=None, c_md=None):
         ax.axvline(cp, color="k", ls="--", lw=1)
     axes[0].axvline(cp, color="k", ls="--", lw=1, label="true change point")
     axes[0].legend(loc="upper right", fontsize=8)
+    y_all = np.concatenate([g1, g2, g_md])
+    y_lo, y_hi = y_all.min(), y_all.max()
+    y_pad = 0.05 * (y_hi - y_lo)
+    for ax in axes:
+        ax.set_ylim(y_lo - y_pad, y_hi + y_pad)
     fig.suptitle("Entropic OT on the joint sample recovers t*; either marginal alone cannot")
     fig.tight_layout()
     fig.savefig(os.path.join(FIG_DIR, "sinkhorn_vs_marginal.pdf"))
