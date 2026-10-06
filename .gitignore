@@ -170,3 +170,6 @@ results/**/*.npy
 
 # Test-data bundle for the unvalidated iterative-resegmenting scripts (11 MB, generator not in repo)
 mfpy/experiments/three_mean_test_data.npz
+
+# Clustering label/result arrays are regenerable outputs
+results/**/*.npz
